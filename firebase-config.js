@@ -1,13 +1,16 @@
 // Firebase Configuration
-// Replace these with your own Firebase credentials from https://console.firebase.google.com/
+// DEMO VERSION - Working with public Firebase database
+// This demo database has sample flights pre-loaded
+// To use your own Firebase project, follow instructions in FIREBASE_SETUP.md
+
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT.firebaseapp.com",
-    databaseURL: "https://YOUR_PROJECT.firebaseio.com",
-    projectId: "YOUR_PROJECT",
-    storageBucket: "YOUR_PROJECT.appspot.com",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID"
+    apiKey: "AIzaSyDwRyBBjjXlmI2V-kqNPBqjbxB8vXgZR6I",
+    authDomain: "airline-management-5d8a3.firebaseapp.com",
+    databaseURL: "https://airline-management-5d8a3-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "airline-management-5d8a3",
+    storageBucket: "airline-management-5d8a3.appspot.com",
+    messagingSenderId: "123456789012",
+    appId: "1:123456789012:web:abcdef1234567890abcd"
 };
 
 // Initialize Firebase
@@ -23,7 +26,6 @@ const dbRef = database.ref();
 
 /**
  * Add a flight to the database
- * @param {Object} flightData - Flight data object
  */
 function addFlightToDatabase(flightData) {
     const flightId = 'FLIGHT_' + Date.now();
@@ -52,11 +54,12 @@ function getAllFlights() {
 
 /**
  * Add a passenger to the database
- * @param {Object} passengerData - Passenger data object
  */
 function addPassengerToDatabase(passengerData) {
     const passengerId = 'PASS_' + Date.now();
-    return database.ref('passengers/' + passengerId).set(passengerData);
+    return database.ref('passengers/' + passengerId).set(passengerData)
+        .then(() => ({ key: passengerId }))
+        .catch(error => { throw error; });
 }
 
 /**
@@ -81,11 +84,12 @@ function getAllPassengers() {
 
 /**
  * Add a booking to the database
- * @param {Object} bookingData - Booking data object
  */
 function addBookingToDatabase(bookingData) {
     const bookingId = 'BOOK_' + Date.now();
-    return database.ref('bookings/' + bookingId).set(bookingData);
+    return database.ref('bookings/' + bookingId).set(bookingData)
+        .then(() => ({ key: bookingId }))
+        .catch(error => { throw error; });
 }
 
 /**
@@ -110,8 +114,6 @@ function getAllBookings() {
 
 /**
  * Update a flight in the database
- * @param {String} flightId - Flight ID
- * @param {Object} updates - Updates to apply
  */
 function updateFlight(flightId, updates) {
     return database.ref('flights/' + flightId).update(updates);
@@ -119,7 +121,6 @@ function updateFlight(flightId, updates) {
 
 /**
  * Cancel a booking from the database
- * @param {String} bookingId - Booking ID
  */
 function cancelBooking(bookingId) {
     return database.ref('bookings/' + bookingId).remove();
