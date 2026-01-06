@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airline Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>✈️ Airline Management System</h1>
+            <p>Book your flight with ease</p>
+        </header>
+
+        <nav class="navbar">
+            <ul>
+                <li><a href="#flights" onclick="loadFlights()">Available Flights</a></li>
+                <li><a href="#booking" onclick="showBookingForm()">Book Flight</a></li>
+                <li><a href="#myBookings" onclick="showMyBookings()">My Bookings</a></li>
+                <li><a href="#passengers" onclick="loadPassengers()">Passengers</a></li>
+            </ul>
+        </nav>
+
+        <!-- Available Flights Section -->
+        <section id="flights" class="section">
+            <h2>Available Flights</h2>
+            <div id="flightsList" class="flights-container">
+                <!-- Flights will be loaded here from Firebase -->
+            </div>
+        </section>
+
+        <!-- Booking Form Section -->
+        <section id="booking" class="section">
+            <h2>Book a Flight</h2>
+            <form id="bookingForm" class="form">
+                <div class="form-group">
+                    <label for="passengerName">Passenger Name:</label>
+                    <input type="text" id="passengerName" required>
+                </div>
+                <div class="form-group">
+                    <label for="passengerEmail">Email:</label>
+                    <input type="email" id="passengerEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="passengerPhone">Phone:</label>
+                    <input type="tel" id="passengerPhone" required>
+                </div>
+                <div class="form-group">
+                    <label for="passengerDOB">Date of Birth:</label>
+                    <input type="date" id="passengerDOB" required>
+                </div>
+                <div class="form-group">
+                    <label for="flightSelect">Select Flight:</label>
+                    <select id="flightSelect" required>
+                        <option value="">Choose a flight</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="seatNumber">Seat Number:</label>
+                    <input type="number" id="seatNumber" min="1" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Book Flight</button>
+            </form>
+        </section>
+
+        <!-- My Bookings Section -->
+        <section id="myBookings" class="section">
+            <h2>My Bookings</h2>
+            <div id="bookingsList" class="bookings-container">
+                <!-- User bookings will be displayed here -->
+            </div>
+        </section>
+
+        <!-- Passengers Section -->
+        <section id="passengers" class="section">
+            <h2>Registered Passengers</h2>
+            <div id="passengersList" class="passengers-container">
+                <!-- Passengers list will be loaded here -->
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2026 Airline Management System. All rights reserved.</p>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js"></script>
+    <script src="firebase-config.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
